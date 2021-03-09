@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Manuel Gozzi - Progetto Esame Sistemi e Tecnologie Web</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+    <script>
+
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var form = document.getElementById('main-form');
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    verifyNameInput();
+                    verifySurnameInput();
+                    verifyEmail();
+                    verifyPassword();
+                    form.classList.add('was-validated');
+                }, false);
+
+                form.addEventListener('reset', function(event) {
+                    form.classList.remove('was-validated')
+                });
+            }, false);
+        })();
+
+        function verifyPassword() {
+
+            let passwordInput = document.getElementById('password-input');
+            let passwordConfirmationInput = document.getElementById('conferma-password-input');
+
+            // TODO verificare struttura password (caratteri speciali e varie)
+
+            if (passwordInput.value !== passwordConfirmationInput.value) {
+                let message = (passwordConfirmationInput.value === null || passwordConfirmationInput.value === "") ?
+                    "Si prega di confermare la password precedentemente digitata."
+                    : "La password digitata deve corrispondere alla password digitata precedentemente."
+                passwordConfirmationInput.setCustomValidity(message);
+                document.getElementById('conferma-password-invalid-div').innerText = message;
+            } else {
+                passwordConfirmationInput.setCustomValidity('');
+                if (passwordConfirmationInput.value === null || passwordConfirmationInput.value === "") {
+                    document.getElementById('conferma-password-invalid-div').innerText = 'Campo obbligatorio.';
+                }
+                if (passwordInput.value === null || passwordInput.value === "") {
+                    document.getElementById('password-invalid-div').innerText = 'Campo obbligatorio.';
+                }
+            }
+        }
+
+        function verifyNameInput() {
+            checkFieldMaxLength('nome-input', 25, 'nome-invalid-div', 'La lunghezza del nome non deve superare i 25 caratteri');
+        }
+
+        function verifySurnameInput() {
+            checkFieldMaxLength('cognome-input', 30, 'cognome-invalid-div', 'La lunghezza del cognome non deve superare i 30 caratteri.');
+        }
+
+        function verifyEmail() {
+            checkFieldMaxLength('email-input', 30, 'email-invalid-div', 'La lunghezza dell\'e-mail non deve superare i 30 caratteri.');
+        }
+
+        function checkFieldMaxLength(fieldId, maxlength, divId, errorMessage) {
+            let field = document.getElementById(fieldId);
+            let value = field.value;
+            if (value.length >= maxlength) {
+                document.getElementById(divId).innerText = errorMessage;
+                field.setCustomValidity(errorMessage);
+            } else {
+                document.getElementById(divId).innerText = 'Campo obbligatorio.';
+            }
+        }
+
+        /**
+         *  Password (campo di testo editabile – max 30 caratteri). La password deve contenere:
+         o un minimo di 8 caratteri
+         o una lettera minuscola
+         o una lettera maiuscola
+         o un numero
+         */
+    </script>
+</head>
+<body>
+<div class="container" id="main-container">
+    <div class="container-fluid" style="margin-top:2em">
+
+        <form id="main-form" class="needs-validation" novalidate>
+            <div class="form-group">
+
+                <!-- Prima riga, responsabile della gestione delle informazioni seguenti: nome, cognome, data di nascita -->
+                <div class="form-group" id="nome-div">
+                    <label class="form-check-label" id="nome-label">Nome</label>
+                    <input class="form-control" type="text" title="Nome" id="nome-input" required/>
+                    <div class="invalid-feedback" id="nome-invalid-div">
+                        <!-- Filled with JS -->
+                    </div>
+                </div>
+                <div class="form-group" id="cognome-div">
+                    <label class="form-check-label" id="cognome-label">Cognome</label>
+                    <input class="form-control" type="text" title="Cognome" id="cognome-input" required/>
+                    <div class="invalid-feedback" id="cognome-invalid-div">
+                        <!-- Filled with JS -->
+                    </div>
+                </div>
+                <div class="form-group" id="data-di-nascita-div">
+                    <label class="form-check-label" id="data-di-nascita-label">Data di nascita</label>
+                    <input class="form-control" type="date" title="Data di nascita" id="data-di-nascita-input"
+                           required/>
+                    <div class="invalid-feedback" id="data-di-nascita-invalid-div">
+                        Campo obbligatorio.
+                    </div>
+                </div>
+
+                <!-- Seconda riga, responsabile della gestione delle informazioni seguenti: nome, cognome, data di nascita -->
+                <div class="form-group" id="luogo-di-nascita-div">
+                    <label class="form-check-label" id="luogo-di-nascita-label">Luogo di nascita</label>
+                    <select class="custom-select" id="luogo-di-nascita-select" required>
+                        <option selected disabled value="">Seleziona</option>
+                        <option value="Abruzzo">Abruzzo</option>
+                        <option value="Basilicata">Basilicata</option>
+                        <option value="Calabria">Calabria</option>
+                        <option value="Campania">Campania</option>
+                        <option value="Emilia-Romagna">Emilia-Romagna</option>
+                        <option value="Friuli Venezia Giulia">Friuli Venezia Giulia</option>
+                        <option value="Lazio">Lazio</option>
+                        <option value="Liguria">Liguria</option>
+                        <option value="Lombardia">Lombardia</option>
+                        <option value="Marche">Marche</option>
+                        <option value="Piemonte">Piemonte</option>
+                        <option value="Puglia">Puglia</option>
+                        <option value="Sardegna">Sardegna</option>
+                        <option value="Sicilia">Sicilia</option>
+                        <option value="Toscana">Toscana</option>
+                        <option value="Trentino-Alto Adige">Trentino-Alto Adige</option>
+                        <option value="Umbria">Umbria</option>
+                        <option value="Valle d'Aosta">Valle d'Aosta</option>
+                        <option value="Veneto">Veneto</option>
+                    </select>
+                    <div class="invalid-feedback" id="luogo-di-nascita-invalid-div">
+                        Si prega di selezionare una regione valida.
+                    </div>
+                </div>
+                <div class="form-group" id="email-div">
+                    <label class="form-check-label" id="email-label">E-mail</label>
+                    <input class="form-control" type="email" title="E-mail" id="email-input" required/>
+                    <div class="invalid-feedback" id="email-invalid-div">
+                        <!-- Filled with JS -->
+                    </div>
+                </div>
+                <div class="form-group" id="password-div">
+                    <label class="form-check-label" id="password-label">Password</label>
+                    <input class="form-control" type="password" id="password-input" required>
+                    <div class="invalid-feedback" id="password-invalid-div">
+                        <!-- Filled with JS -->
+                    </div>
+                </div>
+                <div class="form-group" id="conferma-password-div">
+                    <label class="form-check-label" id="conferma-password-label">Conferma password</label>
+                    <input class="form-control" type="password" id="conferma-password-input" required>
+                    <div class="invalid-feedback" id="conferma-password-invalid-div">
+                        <!-- Filled with JS -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" id="submit-input" value="Invio"/>
+                    <input class="btn btn-outline-secondary" type="reset" id="reset-input" value="Annulla"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
