@@ -96,8 +96,10 @@ function checkPasswordSyntax(passwordInput, invalidDivId) {
     if (!(atLeast8Characters && atLeastOneLowercaseLetter && atLeastOneUppercaseLetter && atLeastOneNumber)) {
 
         let message = "La password deve contenere almeno 8 caratteri, una lettera maiuscola, una minuscola e un numero.";
-        passwordInput.setCustomValidity(message)
+        passwordInput.setCustomValidity(message);
         document.getElementById(invalidDivId).innerText = message;
+
+        // TODO aggiungere errore anche sull'input di conferma password
     } else {
 
         // Altrimenti la password si considera valida
