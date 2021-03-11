@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Manuel Gozzi - Progetto Esame Sistemi e Tecnologie Web</title>
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
     <script>
 
         (function () {
@@ -22,66 +24,72 @@
                     form.classList.add('was-validated');
                 }, false);
 
-                form.addEventListener('reset', function(event) {
+                form.addEventListener('reset', function () {
                     form.classList.remove('was-validated')
                 });
             }, false);
         })();
 
-        function verifyPassword() {
-
-            let passwordInput = document.getElementById('password-input');
-            let passwordConfirmationInput = document.getElementById('conferma-password-input');
-
-            // TODO verificare struttura password (caratteri speciali e varie)
-
-            if (passwordInput.value !== passwordConfirmationInput.value) {
-                let message = (passwordConfirmationInput.value === null || passwordConfirmationInput.value === "") ?
-                    "Si prega di confermare la password precedentemente digitata."
-                    : "La password digitata deve corrispondere alla password digitata precedentemente."
-                passwordConfirmationInput.setCustomValidity(message);
-                document.getElementById('conferma-password-invalid-div').innerText = message;
-            } else {
-                passwordConfirmationInput.setCustomValidity('');
-                if (passwordConfirmationInput.value === null || passwordConfirmationInput.value === "") {
-                    document.getElementById('conferma-password-invalid-div').innerText = 'Campo obbligatorio.';
-                }
-                if (passwordInput.value === null || passwordInput.value === "") {
-                    document.getElementById('password-invalid-div').innerText = 'Campo obbligatorio.';
-                }
-            }
-        }
-
+        /**
+         * Funzione che verifica l'input relativo al nome, accertandosi che la sua lunghezza sia al massimo pari a 25
+         * caratteri.
+         */
         function verifyNameInput() {
             checkFieldMaxLength('nome-input', 25, 'nome-invalid-div', 'La lunghezza del nome non deve superare i 25 caratteri');
         }
 
+        /**
+         * Funzione che verifica l'input relativo al cognome, accertandosi che la sua lunghezza sia al massimo pari a 30
+         * caratteri.
+         */
         function verifySurnameInput() {
             checkFieldMaxLength('cognome-input', 30, 'cognome-invalid-div', 'La lunghezza del cognome non deve superare i 30 caratteri.');
         }
 
+        /**
+         * Funzione che verifica l'input relativo all'e-mail, accertandosi che la sua lunghezza sia al massimo pari a 30
+         * caratteri (la validità del formato dell'e-mail viene verificata nativamente nella collaborazione tra HTML5
+         * e Bootstrap, tramite l'apposizione del valore "email" sull'attributo "type" dell'input relativo proprio
+         * all'e-mail).
+         */
         function verifyEmail() {
             checkFieldMaxLength('email-input', 30, 'email-invalid-div', 'La lunghezza dell\'e-mail non deve superare i 30 caratteri.');
         }
 
+        /**
+         * Funzione che verifica che un generico input (identificato da un id preposto) non superi una certa dimensione
+         * fissata in numero di caratteri).
+         *
+         * @param fieldId è l'id HTML che identifica l'input
+         * @param maxlength è la lunghezza massima dei caratteri, espressa in numero intero
+         * @param divId è l'id HTML del div responsabile della restituzione del messaggio d'errore
+         * @param errorMessage è il messaggio d'errore che si intende stampare in caso di superamento della dimensione
+         *        massima
+         */
         function checkFieldMaxLength(fieldId, maxlength, divId, errorMessage) {
+
+            // Recupero il riferimento all'input richiesto
             let field = document.getElementById(fieldId);
+
+            // Recupero il valore inserito all'interno dell'input
             let value = field.value;
+
+            // Verifico la dimensione, in caratteri, dell'input
             if (value.length >= maxlength) {
+
+                // Inserisco l'errore di validazione
                 document.getElementById(divId).innerText = errorMessage;
                 field.setCustomValidity(errorMessage);
             } else {
+
+                /*
+                 * Reimposto il messaggio d'errore predefinito e rimuovo l'eventuale errore di validazione
+                 * precedentemente impostato.
+                 */
                 document.getElementById(divId).innerText = 'Campo obbligatorio.';
+                field.setCustomValidity('');
             }
         }
-
-        /**
-         *  Password (campo di testo editabile – max 30 caratteri). La password deve contenere:
-         o un minimo di 8 caratteri
-         o una lettera minuscola
-         o una lettera maiuscola
-         o un numero
-         */
     </script>
 </head>
 <body>
