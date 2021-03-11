@@ -26,13 +26,12 @@
                 form.addEventListener('submit', function (event) {
 
                     /*
-                     * Se la form non è valida, fermo la propagazione dell'evento e disabilito il comportamento di
-                     * default dell'evento.
+                     * Fermo la propagazione dell'evento e disabilito il comportamento di default dell'evento,
+                     * avviando la validazione della form.
                      */
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
+                    form.checkValidity();
+                    event.preventDefault();
+                    event.stopPropagation();
 
                     // Verifico la validità del nome
                     verifyNameInput();
@@ -64,7 +63,8 @@
 
         <h1 class="h1">Prova progettuale Sistemi e Tecnologie Web</h1>
         <h4 class="h4">Studente: Manuel Gozzi</h4>
-        <h5 class="h5"><i>Corso di studi: Ingegneria Informatica L8 - Universit&agrave; degli Studi "Guglielmo Marconi"</i></h5>
+        <h5 class="h5"><i>Corso di studi: Ingegneria Informatica L8 - Universit&agrave; degli Studi "Guglielmo
+            Marconi"</i></h5>
         <hr/>
         <form id="main-form" class="needs-validation" novalidate>
             <div class="form-group">
