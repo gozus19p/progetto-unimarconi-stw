@@ -1,10 +1,13 @@
-// Elenco di script Javascript atti a definire le funzionalità relative alla verifica e validazione della password.
+/*
+ * Elenco di script Javascript atti a definire le funzionalità relative alla verifica e validazione della password.
+ *
+ * @author Manuel Gozzi
+ */
 
 /**
  * Funzione che verifica la validità della password, assicurandosi anche della relativa corrispondenza con il
  * campo "Conferma password".
  *
- * @author Manuel Gozzi
  */
 function verifyPassword() {
 

@@ -1,0 +1,46 @@
+/*
+ * Aggiunta dell'aimazione sul background.
+ */
+body {
+    background: linear-gradient(-45deg, #3160ff, #3c80e7, #17baf6, #004ae2);
+    background-size: 400% 400%;
+    animation: gradient 25s ease infinite;
+}
+
+/*
+* Lieve animazione CSS gradiente per il background del body.
+ */
+@keyframes gradient {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+/*
+ * Classe CSS che aggiunge un bordo di 1 pixel, bianco, arrotodondato.
+ */
+.bordered {
+    border: 1px solid #FFF;
+    border-radius: 1%;
+}
+
+/*
+ * Classe CSS che aggiunge un background bianco.
+ */
+.white-background {
+    background-color: #FFF;
+}
+
+/*
+ * Classe CSS che aggiunge margini e padding.
+ */
+.space {
+    margin-top:1em;
+    padding: 1em;
+}

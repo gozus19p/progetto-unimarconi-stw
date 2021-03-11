@@ -3,99 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>Manuel Gozzi - Progetto Esame Sistemi e Tecnologie Web</title>
+    <link rel="stylesheet" type="text/css" href="../css/custom.css"/>
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/length-validation.js"></script>
+    <script type="text/javascript" src="../js/password-validation.js"></script>
     <script>
 
+        /*
+         * Quando si carica la pagina web, aggiungo un event listener che identifichi l'evento di submit della form
+         * allo scopo di validarla.
+         */
         (function () {
             'use strict';
             window.addEventListener('load', function () {
-                var form = document.getElementById('main-form');
+
+                // Recupero il riferimento della form
+                let form = document.getElementById('main-form');
+
+                // Aggiungo l'event listener citato precedentemente
                 form.addEventListener('submit', function (event) {
+
+                    /*
+                     * Se la form non è valida, fermo la propagazione dell'evento e disabilito il comportamento di
+                     * default dell'evento.
+                     */
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();
                     }
+
+                    // Verifico la validità del nome
                     verifyNameInput();
+
+                    // Verifico la validità del cognome
                     verifySurnameInput();
-                    verifyEmail();
+
+                    // Verifico la validità dell'e-mail
+                    verifyEmailInput();
+
+                    // Verifico la validità della password, e della relativa conferma
                     verifyPassword();
+
+                    // Aggiungo alla form la classe CSS 'was-validated'
                     form.classList.add('was-validated');
                 }, false);
 
+                // Quando viene eseguito il reset della form mi assicuro di rimuovere la classe CSS 'was-validated'
                 form.addEventListener('reset', function () {
                     form.classList.remove('was-validated')
                 });
             }, false);
         })();
-
-        /**
-         * Funzione che verifica l'input relativo al nome, accertandosi che la sua lunghezza sia al massimo pari a 25
-         * caratteri.
-         */
-        function verifyNameInput() {
-            checkFieldMaxLength('nome-input', 25, 'nome-invalid-div', 'La lunghezza del nome non deve superare i 25 caratteri');
-        }
-
-        /**
-         * Funzione che verifica l'input relativo al cognome, accertandosi che la sua lunghezza sia al massimo pari a 30
-         * caratteri.
-         */
-        function verifySurnameInput() {
-            checkFieldMaxLength('cognome-input', 30, 'cognome-invalid-div', 'La lunghezza del cognome non deve superare i 30 caratteri.');
-        }
-
-        /**
-         * Funzione che verifica l'input relativo all'e-mail, accertandosi che la sua lunghezza sia al massimo pari a 30
-         * caratteri (la validità del formato dell'e-mail viene verificata nativamente nella collaborazione tra HTML5
-         * e Bootstrap, tramite l'apposizione del valore "email" sull'attributo "type" dell'input relativo proprio
-         * all'e-mail).
-         */
-        function verifyEmail() {
-            checkFieldMaxLength('email-input', 30, 'email-invalid-div', 'La lunghezza dell\'e-mail non deve superare i 30 caratteri.');
-        }
-
-        /**
-         * Funzione che verifica che un generico input (identificato da un id preposto) non superi una certa dimensione
-         * fissata in numero di caratteri).
-         *
-         * @param fieldId è l'id HTML che identifica l'input
-         * @param maxlength è la lunghezza massima dei caratteri, espressa in numero intero
-         * @param divId è l'id HTML del div responsabile della restituzione del messaggio d'errore
-         * @param errorMessage è il messaggio d'errore che si intende stampare in caso di superamento della dimensione
-         *        massima
-         */
-        function checkFieldMaxLength(fieldId, maxlength, divId, errorMessage) {
-
-            // Recupero il riferimento all'input richiesto
-            let field = document.getElementById(fieldId);
-
-            // Recupero il valore inserito all'interno dell'input
-            let value = field.value;
-
-            // Verifico la dimensione, in caratteri, dell'input
-            if (value.length >= maxlength) {
-
-                // Inserisco l'errore di validazione
-                document.getElementById(divId).innerText = errorMessage;
-                field.setCustomValidity(errorMessage);
-            } else {
-
-                /*
-                 * Reimposto il messaggio d'errore predefinito e rimuovo l'eventuale errore di validazione
-                 * precedentemente impostato.
-                 */
-                document.getElementById(divId).innerText = 'Campo obbligatorio.';
-                field.setCustomValidity('');
-            }
-        }
     </script>
 </head>
 <body>
 <div class="container" id="main-container">
-    <div class="container-fluid" style="margin-top:2em">
+    <div class="container-fluid bordered white-background space">
 
+        <h1 class="h1">Prova progettuale Sistemi e Tecnologie Web</h1>
+        <h4 class="h4">Studente: Manuel Gozzi</h4>
+        <h5 class="h5"><i>Corso di studi: Ingegneria Informatica L8 - Universit&agrave; degli Studi "Guglielmo Marconi"</i></h5>
+        <hr/>
         <form id="main-form" class="needs-validation" novalidate>
             <div class="form-group">
 
@@ -104,14 +74,14 @@
                     <label class="form-check-label" id="nome-label">Nome</label>
                     <input class="form-control" type="text" title="Nome" id="nome-input" required/>
                     <div class="invalid-feedback" id="nome-invalid-div">
-                        <!-- Filled with JS -->
+                        <!-- Contenuto riempito tramite l'utilizzo di JS -->
                     </div>
                 </div>
                 <div class="form-group" id="cognome-div">
                     <label class="form-check-label" id="cognome-label">Cognome</label>
                     <input class="form-control" type="text" title="Cognome" id="cognome-input" required/>
                     <div class="invalid-feedback" id="cognome-invalid-div">
-                        <!-- Filled with JS -->
+                        <!-- Contenuto riempito tramite l'utilizzo di JS -->
                     </div>
                 </div>
                 <div class="form-group" id="data-di-nascita-div">
@@ -156,27 +126,27 @@
                     <label class="form-check-label" id="email-label">E-mail</label>
                     <input class="form-control" type="email" title="E-mail" id="email-input" required/>
                     <div class="invalid-feedback" id="email-invalid-div">
-                        <!-- Filled with JS -->
+                        <!-- Contenuto riempito tramite l'utilizzo di JS -->
                     </div>
                 </div>
                 <div class="form-group" id="password-div">
                     <label class="form-check-label" id="password-label">Password</label>
                     <input class="form-control" type="password" id="password-input" required>
                     <div class="invalid-feedback" id="password-invalid-div">
-                        <!-- Filled with JS -->
+                        <!-- Contenuto riempito tramite l'utilizzo di JS -->
                     </div>
                 </div>
                 <div class="form-group" id="conferma-password-div">
                     <label class="form-check-label" id="conferma-password-label">Conferma password</label>
                     <input class="form-control" type="password" id="conferma-password-input" required>
                     <div class="invalid-feedback" id="conferma-password-invalid-div">
-                        <!-- Filled with JS -->
+                        <!-- Contenuto riempito tramite l'utilizzo di JS -->
                     </div>
                 </div>
-
+                <hr/>
                 <div class="form-group">
                     <input class="btn btn-primary" type="submit" id="submit-input" value="Invio"/>
-                    <input class="btn btn-outline-secondary" type="reset" id="reset-input" value="Annulla"/>
+                    <input class="btn btn-danger" type="reset" id="reset-input" value="Annulla"/>
                 </div>
             </div>
         </form>
