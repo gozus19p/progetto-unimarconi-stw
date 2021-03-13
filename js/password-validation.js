@@ -58,7 +58,7 @@ function checkCorrespondenceBetweenInputAndConfirmation(passwordInputValue, pass
 
     // Se la password inserita non corrisponde alla sua conferma, si segnala il problema
     if (passwordInputValue !== passwordConfirmationValue) {
-        let message = "La password digitata deve corrispondere alla password digitata precedentemente."
+        let message = "Il valore deve corrispondere a quello della password generata precedentemente."
         passwordConfirmationInput.setCustomValidity(message);
         document.getElementById(invalidDivId).innerText = message;
     } else {

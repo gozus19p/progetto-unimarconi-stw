@@ -10,7 +10,7 @@
  * caratteri.
  */
 function verifyNameInput() {
-    checkFieldMaxLength('nome-input', 25, 'nome-invalid-div', 'La lunghezza del nome non deve superare i 25 caratteri');
+    checkFieldMaxLength('nome-input', 25, 'nome-invalid-div', 'La lunghezza del nome non deve superare i 25 caratteri.');
 }
 
 /**
