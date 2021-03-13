@@ -55,6 +55,7 @@ function checkFieldMaxLength(fieldId, maxlength, divId, errorMessage) {
         // Inserisco l'errore di validazione
         document.getElementById(divId).innerText = errorMessage;
         field.setCustomValidity(errorMessage);
+        return false;
     } else {
 
         /*
@@ -63,5 +64,6 @@ function checkFieldMaxLength(fieldId, maxlength, divId, errorMessage) {
          */
         document.getElementById(divId).innerText = 'Campo obbligatorio.';
         field.setCustomValidity('');
+        return true;
     }
 }

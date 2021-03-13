@@ -76,6 +76,13 @@ function checkCorrespondenceBetweenInputAndConfirmation(passwordInputValue, pass
  */
 function checkPasswordSyntax(passwordInput, invalidDivId) {
 
+    let passwordLengthIsOk = checkFieldMaxLength('password-input', 30, 'password-invalid-div', 'La lunghezza della password non deve superare i 30 caratteri.');
+    let passwordConfirmLengthIsOk = checkFieldMaxLength('conferma-password-input', 30, 'conferma-password-invalid-div', 'La lunghezza della password non deve superare i 30 caratteri.');
+
+    if (!passwordConfirmLengthIsOk || !passwordLengthIsOk) {
+        return;
+    }
+
     /*
      * Verifico la struttura della password (booleano):
      * 1. una password deve contenere almeno 8 caratteri, verifico il valore del campo "length" del
