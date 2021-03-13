@@ -5,6 +5,7 @@
     <title>Manuel Gozzi - Progetto Esame Sistemi e Tecnologie Web</title>
     <link rel="stylesheet" type="text/css" href="./css/custom.css"/>
     <link rel="stylesheet" type="text/css" href="./css/bootstrap.css"/>
+    <link rel="icon" href="./css/favicon.ico"/>
     <script type="text/javascript" src="./js/length-validation.js"></script>
     <script type="text/javascript" src="./js/password-validation.js"></script>
     <script>
@@ -92,7 +93,7 @@
                 <div class="form-group" id="data-di-nascita-div">
                     <label class="form-check-label" id="data-di-nascita-label">Data di nascita</label>
                     <input class="form-control" type="date" title="Data di nascita" id="data-di-nascita-input"
-                           required/>
+                           value="dd-mm-yyyy" onkeypress="return false" required/>
                     <div class="invalid-feedback" id="data-di-nascita-invalid-div">
                         Campo obbligatorio.
                     </div>
